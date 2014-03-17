@@ -11,6 +11,6 @@
     <title></title>
   </head>
   <body>
-     Successfully authenticated.
+     Successfully authenticated with SSL.
   </body>
 </html>

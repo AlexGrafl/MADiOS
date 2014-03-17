@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dasi-ssl">
+    <output-path>$PROJECT_DIR$/out/artifacts/dasi_ssl</output-path>
+    <root id="archive" name="dasi-ssl.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="dasi-webapp" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="dasi-webapp/web/Web" />
+    </root>
+  </artifact>
+</component>
