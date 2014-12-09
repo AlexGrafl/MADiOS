@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71F441471A3722E500C93352 /* AddArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F441461A3722E500C93352 /* AddArtistViewController.swift */; };
 		D3EBC6291A2721AF0009E6BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EBC6281A2721AF0009E6BF /* AppDelegate.swift */; };
 		D3EBC62C1A2721AF0009E6BF /* ArtistsAlbums.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3EBC62A1A2721AF0009E6BF /* ArtistsAlbums.xcdatamodeld */; };
 		D3EBC62E1A2721AF0009E6BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EBC62D1A2721AF0009E6BF /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		71F441461A3722E500C93352 /* AddArtistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArtistViewController.swift; sourceTree = "<group>"; };
 		D3EBC6231A2721AF0009E6BF /* ArtistsAlbums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistsAlbums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3EBC6271A2721AF0009E6BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3EBC6281A2721AF0009E6BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		D3EBC6251A2721AF0009E6BF /* ArtistsAlbums */ = {
 			isa = PBXGroup;
 			children = (
+				71F441461A3722E500C93352 /* AddArtistViewController.swift */,
 				D3EBC6281A2721AF0009E6BF /* AppDelegate.swift */,
 				D3EBC62D1A2721AF0009E6BF /* ViewController.swift */,
 				D3EBC62F1A2721AF0009E6BF /* Main.storyboard */,
@@ -218,6 +221,7 @@
 				D3EBC62E1A2721AF0009E6BF /* ViewController.swift in Sources */,
 				D3EBC62C1A2721AF0009E6BF /* ArtistsAlbums.xcdatamodeld in Sources */,
 				D3EBC6291A2721AF0009E6BF /* AppDelegate.swift in Sources */,
+				71F441471A3722E500C93352 /* AddArtistViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
