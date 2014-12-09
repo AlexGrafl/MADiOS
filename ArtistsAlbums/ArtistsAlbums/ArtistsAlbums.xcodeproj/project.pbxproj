@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		481AB3181A3763E700CC069E /* AddAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481AB3171A3763E700CC069E /* AddAlbumViewController.swift */; };
+		481AB31A1A37686C00CC069E /* ArtistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481AB3191A37686C00CC069E /* ArtistTableViewController.swift */; };
+		481AB31C1A376A9500CC069E /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481AB31B1A376A9500CC069E /* AlbumTableViewController.swift */; };
 		71F441471A3722E500C93352 /* AddArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F441461A3722E500C93352 /* AddArtistViewController.swift */; };
 		D3EBC6291A2721AF0009E6BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EBC6281A2721AF0009E6BF /* AppDelegate.swift */; };
 		D3EBC62C1A2721AF0009E6BF /* ArtistsAlbums.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3EBC62A1A2721AF0009E6BF /* ArtistsAlbums.xcdatamodeld */; };
@@ -28,6 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		481AB3171A3763E700CC069E /* AddAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlbumViewController.swift; sourceTree = "<group>"; };
+		481AB3191A37686C00CC069E /* ArtistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTableViewController.swift; sourceTree = "<group>"; };
+		481AB31B1A376A9500CC069E /* AlbumTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 		71F441461A3722E500C93352 /* AddArtistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArtistViewController.swift; sourceTree = "<group>"; };
 		D3EBC6231A2721AF0009E6BF /* ArtistsAlbums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistsAlbums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3EBC6271A2721AF0009E6BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,7 +87,10 @@
 		D3EBC6251A2721AF0009E6BF /* ArtistsAlbums */ = {
 			isa = PBXGroup;
 			children = (
+				481AB3171A3763E700CC069E /* AddAlbumViewController.swift */,
+				481AB31B1A376A9500CC069E /* AlbumTableViewController.swift */,
 				71F441461A3722E500C93352 /* AddArtistViewController.swift */,
+				481AB3191A37686C00CC069E /* ArtistTableViewController.swift */,
 				D3EBC6281A2721AF0009E6BF /* AppDelegate.swift */,
 				D3EBC62D1A2721AF0009E6BF /* ViewController.swift */,
 				D3EBC62F1A2721AF0009E6BF /* Main.storyboard */,
@@ -218,10 +227,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				481AB3181A3763E700CC069E /* AddAlbumViewController.swift in Sources */,
 				D3EBC62E1A2721AF0009E6BF /* ViewController.swift in Sources */,
 				D3EBC62C1A2721AF0009E6BF /* ArtistsAlbums.xcdatamodeld in Sources */,
+				481AB31A1A37686C00CC069E /* ArtistTableViewController.swift in Sources */,
 				D3EBC6291A2721AF0009E6BF /* AppDelegate.swift in Sources */,
 				71F441471A3722E500C93352 /* AddArtistViewController.swift in Sources */,
+				481AB31C1A376A9500CC069E /* AlbumTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

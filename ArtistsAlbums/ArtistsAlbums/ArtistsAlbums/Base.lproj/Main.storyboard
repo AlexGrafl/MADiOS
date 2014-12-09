@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="b6e-C7-WnT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="b6e-C7-WnT">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
     </dependencies>
     <scenes>
         <!--Add Artist-->
@@ -17,38 +17,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sL5-FL-q95">
-                                <rect key="frame" x="48" y="113" width="97" height="30"/>
+                                <rect key="frame" x="173" y="105" width="255" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ixJ-DM-yJv">
-                                <rect key="frame" x="48" y="163" width="97" height="30"/>
+                                <rect key="frame" x="173" y="159" width="255" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvy-IE-EcS">
-                                <rect key="frame" x="73" y="213" width="46" height="30"/>
+                                <rect key="frame" x="277" y="210" width="46" height="30"/>
                                 <state key="normal" title="Add">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addArtist:" destination="bVE-oB-15e" eventType="touchUpInside" id="5tk-jE-ZKb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="Qvy-IE-EcS" id="S9t-pK-7TC"/>
-                        <outlet property="artistLabel" destination="ixJ-DM-yJv" id="0Z2-ZI-u84"/>
+                        <outlet property="artistLabel" destination="ixJ-DM-yJv" id="rr4-jB-o7d"/>
                         <outlet property="artistName" destination="sL5-FL-q95" id="0Hj-1z-Boz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7F-Jo-USq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1424" y="69"/>
+            <point key="canvasLocation" x="1410" y="75"/>
         </scene>
         <!--Artists-->
         <scene sceneID="OhC-O4-QLt">
             <objects>
-                <tableViewController id="Qpc-IG-hea" customClass="ViewController" customModule="ArtistsAlbums" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Qpc-IG-hea" userLabel="Artists" customClass="ArtistTableViewController" customModule="ArtistsAlbums" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NCX-zd-MDr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,7 +88,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="artistTable" destination="NCX-zd-MDr" id="985-5O-LZ8"/>
+                        <outlet property="artistTable" destination="NCX-zd-MDr" id="HXJ-Zv-Eei"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lih-73-jVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -95,7 +98,7 @@
         <!--Albums-->
         <scene sceneID="wyU-sQ-asw">
             <objects>
-                <tableViewController id="0gP-dI-IsJ" userLabel="Albums" sceneMemberID="viewController">
+                <tableViewController id="0gP-dI-IsJ" userLabel="Albums" customClass="AlbumTableViewController" customModule="ArtistsAlbums" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Bze-Px-0n3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,6 +108,14 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jPt-KL-mN2" id="zJa-om-lK4">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Album" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beN-yP-hgq">
+                                            <rect key="frame" x="18" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -120,6 +131,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="albumTable" destination="Bze-Px-0n3" id="kJm-kZ-S63"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="joA-Pw-iry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -128,7 +142,7 @@
         <!--Add Album-->
         <scene sceneID="f7F-Wi-iHd">
             <objects>
-                <viewController id="apb-jn-3UH" userLabel="Add Album" sceneMemberID="viewController">
+                <viewController id="apb-jn-3UH" userLabel="Add Album" customClass="AddAlbumViewController" customModule="ArtistsAlbums" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tuK-2n-clO"/>
                         <viewControllerLayoutGuide type="bottom" id="P9z-gu-CtP"/>
@@ -136,8 +150,40 @@
                     <view key="view" contentMode="scaleToFill" id="vOY-03-FVN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dWJ-6r-Hw7">
+                                <rect key="frame" x="173" y="161" width="255" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Year" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lub-GO-G5B">
+                                <rect key="frame" x="173" y="215" width="255" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfU-2s-8Tj">
+                                <rect key="frame" x="277" y="265" width="46" height="30"/>
+                                <state key="normal" title="Add">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addAlbum:" destination="apb-jn-3UH" eventType="touchUpInside" id="Ahi-ck-jy1"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Format" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fdh-3L-D1f">
+                                <rect key="frame" x="173" y="107" width="255" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="addButton" destination="sfU-2s-8Tj" id="qz5-Fx-Ez8"/>
+                        <outlet property="albumFormat" destination="Fdh-3L-D1f" id="1yd-7c-dWa"/>
+                        <outlet property="albumName" destination="dWJ-6r-Hw7" id="eFN-Hm-Kgt"/>
+                        <outlet property="albumYear" destination="lub-GO-G5B" id="pB2-Ue-gPy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uL8-Q5-QlT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -159,7 +205,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQB-1k-x5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="75"/>
+            <point key="canvasLocation" x="78" y="75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1mp-mw-xbg">

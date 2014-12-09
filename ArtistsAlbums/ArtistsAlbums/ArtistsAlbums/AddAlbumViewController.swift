@@ -1,48 +1,50 @@
 //
-//  ViewController.swift
+//  AddAlbumViewController.swift
 //  ArtistsAlbums
 //
-//  Created by Alexander Grafl on 09/12/14.
+//  Created by Mokepon on 09/12/14.
 //  Copyright (c) 2014 Alexander Grafl. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class AddArtistViewController: UIViewController {
+class AddAlbumViewController: UIViewController {
     
-
+    
+    @IBOutlet weak var albumYear: UITextField!
+    @IBOutlet weak var albumName: UITextField!
+    @IBOutlet weak var albumFormat: UITextField!
     @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var artistLabel: UITextField!
-    @IBOutlet weak var artistName: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    @IBAction func addArtist(sender: AnyObject) {
+
+    @IBAction func addAlbum(sender: AnyObject) {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         
         // Get new Artist Object from CoreData
-        let entity =  NSEntityDescription.entityForName("Artist",
+        let entity =  NSEntityDescription.entityForName("Album",
             inManagedObjectContext:
             managedContext)
-        let artist = NSManagedObject(entity: entity!,
+        let album = NSManagedObject(entity: entity!,
             insertIntoManagedObjectContext:managedContext)
-
+        
         // Check if fields are empty
-        if artistName.text.isEmpty || artistLabel.text.isEmpty {
+        if albumName.text.isEmpty || albumFormat.text.isEmpty || albumYear.text.isEmpty {
             let alertController = UIAlertController(title: "Error", message: "Please fill out every field!", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
         } else {
-
+            
             // Set new values
-            artist.setValue(artistName.text, forKey: "name")
-            artist.setValue(artistLabel.text, forKey: "label")
-
+            album.setValue(albumName.text, forKey: "name")
+            album.setValue(albumFormat.text, forKey: "format")
+            album.setValue(albumYear.text, forKey: "year")
+            
             // Persisting and Error Handling
             var error: NSError?
             if !managedContext.save(&error) {
@@ -51,4 +53,3 @@ class AddArtistViewController: UIViewController {
         }
     }
 }
-
