@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var cell:UITableViewCell = self.artistTable.dequeueReusableCellWithIdentifier("ArtistCell") as UITableViewCell
         let artist = artists[indexPath.row]
         
-        cell.textLabel!.text = artist.valueForKey("name") as? String
+        cell.textLabel.text = artist.valueForKey("name") as? String
         
         return cell
     }
