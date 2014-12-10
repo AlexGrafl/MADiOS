@@ -13,6 +13,7 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
 
     @IBOutlet var artistTable: UITableView!
     var artists = [NSManagedObject]()
+    var artistDetails:NSManagedObject = NSManagedObject()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,12 +71,18 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
         return cell
     }
 
-    /*
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let artistDetails = artists[indexPath.row]
+        self.performSegueWithIdentifier("showAlbums", sender: self)
+    }
+
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "showAlbums") {
+            var albumController = segue.destinationViewController as AlbumTableViewController
+            albumController.artist = artistDetails
+        }
     }
-    */
-
 }

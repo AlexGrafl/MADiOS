@@ -13,6 +13,7 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource {
 
     @IBOutlet var albumTable: UITableView!
     var albums = [NSManagedObject]()
+    var artist:NSManagedObject = NSManagedObject()
 
     override func viewDidLoad() {
         super.viewDidLoad()
