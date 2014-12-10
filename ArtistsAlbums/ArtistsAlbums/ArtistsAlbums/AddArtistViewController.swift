@@ -25,24 +25,33 @@ class AddArtistViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext!
         
         // Get new Artist Object from CoreData
-        var artist = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: managedContext) as Artist
-
+        let entity = NSEntityDescription.entityForName("Artist", inManagedObjectContext: managedContext)
+        let artist = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         // Check if fields are empty
         if artistName.text.isEmpty || artistLabel.text.isEmpty {
             let alertController = UIAlertController(title: "Error", message: "Please fill out every field!", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-            
+
             self.presentViewController(alertController, animated: true, completion: nil)
         } else {
             // Set new values
-            artist.name = artistName.text
-            artist.label = artistLabel.text
+            artist.setValue(artistName.text, forKey: "name")
+            artist.setValue(artistLabel.text, forKey: "label")
 
             // Persisting and Error Handling
             var error: NSError? = nil
             if !managedContext.save(&error) {
                 println("Could not save \(error), \(error?.userInfo)")
+                let alertController = UIAlertController(title: "Error", message: "Couldn not save Artist!", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(title: "Success", message: "Artist saved successfully!", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }

@@ -27,10 +27,11 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getAllArtists()
+        artistTable.reloadData()
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,7 +48,7 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
         let fetchRequest = NSFetchRequest(entityName:"Artist")
         
         // Fetch Data from CoreData
-        var error: NSError?
+        var error: NSError? = nil
         
         let fetchedResults = managedContext.executeFetchRequest(fetchRequest,
             error: &error) as [NSManagedObject]?

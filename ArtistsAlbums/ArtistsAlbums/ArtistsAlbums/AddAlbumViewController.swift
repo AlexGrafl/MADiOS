@@ -26,7 +26,8 @@ class AddAlbumViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext!
         
         // Get new Artist Object from CoreData
-        var album = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: managedContext) as Album
+        let entity = NSEntityDescription.entityForName("Album", inManagedObjectContext: managedContext)
+        let album = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         // Check if fields are empty
         if albumName.text.isEmpty || albumFormat.text.isEmpty || albumYear.text.isEmpty {
@@ -37,14 +38,23 @@ class AddAlbumViewController: UIViewController {
         } else {
             
             // Set new values
-            album.name = albumName.text
-            album.format = albumFormat.text
-            album.year = albumYear.text
+            album.setValue(albumFormat.text, forKey: "name")
+            album.setValue(albumFormat.text, forKey: "format")
+            album.setValue(albumYear.text, forKey: "year")
             
             // Persisting and Error Handling
             var error: NSError? = nil
             if !managedContext.save(&error) {
                 println("Could not save \(error), \(error?.userInfo)")
+                let alertController = UIAlertController(title: "Error", message: "Couldn not save Album!", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(title: "Success", message: "Album saved successfully!", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
