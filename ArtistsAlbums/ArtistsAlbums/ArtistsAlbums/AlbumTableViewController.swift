@@ -43,7 +43,7 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource {
         var cell:UITableViewCell = self.albumTable.dequeueReusableCellWithIdentifier("AlbumCell") as UITableViewCell
         let album = albums[indexPath.row]
         
-        cell.textLabel!.text = album.valueForKey("name") as? String
+        cell.textLabel.text = album.valueForKey("name") as? String
         
         return cell
     }

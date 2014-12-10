@@ -12,7 +12,7 @@ import CoreData
 class AddArtistViewController: UIViewController {
     
 
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!	
     @IBOutlet weak var artistLabel: UITextField!
     @IBOutlet weak var artistName: UITextField!
     
@@ -31,6 +31,7 @@ class AddArtistViewController: UIViewController {
         let artist = NSManagedObject(entity: entity!,
             insertIntoManagedObjectContext:managedContext)
 
+        
         // Check if fields are empty
         if artistName.text.isEmpty || artistLabel.text.isEmpty {
             let alertController = UIAlertController(title: "Error", message: "Please fill out every field!", preferredStyle: UIAlertControllerStyle.Alert)
