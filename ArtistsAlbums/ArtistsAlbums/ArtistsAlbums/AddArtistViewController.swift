@@ -48,7 +48,8 @@ class AddArtistViewController: UIViewController {
             
                 self.presentViewController(alertController, animated: true, completion: nil)
             } else {
-                let alertController = UIAlertController(title: "Success", message: "Artist saved successfully!", preferredStyle: UIAlertControllerStyle.Alert)
+                var artistName = artist.valueForKey("name") as String
+                let alertController = UIAlertController(title: "Success", message: "Artist \"\(artistName)\" saved successfully!", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             
                 self.presentViewController(alertController, animated: true, completion: nil)
