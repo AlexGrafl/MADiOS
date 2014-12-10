@@ -2,7 +2,7 @@
 //  Artist.swift
 //  ArtistsAlbums
 //
-//  Created by Mokepon on 10/12/14.
+//  Created by phips m on 10/12/14.
 //  Copyright (c) 2014 Alexander Grafl. All rights reserved.
 //
 

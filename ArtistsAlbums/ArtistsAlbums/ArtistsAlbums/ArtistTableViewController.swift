@@ -55,7 +55,7 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
             error: &error) as [NSManagedObject]?
         
         // Set result as artists array
-        if let results = fetchedResults {
+        if let results = fetchedResults  {
             self.artists = results
         } else {
             println("Could not fetch \(error), \(error!.userInfo)")
@@ -72,10 +72,16 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
     }
 
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let artistDetails = artists[indexPath.row]
-        self.performSegueWithIdentifier("showAlbums", sender: self)
+        
     }
-
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let artistDetails = artists[indexPath.row]
+        self.performSegueWithIdentifier("showAlbum", sender: self)
+        
+    }
+    
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
