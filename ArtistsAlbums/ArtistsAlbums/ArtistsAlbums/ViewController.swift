@@ -16,8 +16,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addArtist()
-        getAllArtists()
         self.artistTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ArtistCell")
     }
 

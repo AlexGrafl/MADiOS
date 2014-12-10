@@ -26,11 +26,7 @@ class AddAlbumViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext!
         
         // Get new Artist Object from CoreData
-        let entity =  NSEntityDescription.entityForName("Album",
-            inManagedObjectContext:
-            managedContext)
-        let album = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext:managedContext)
+        var album = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: managedContext) as Album
         
         // Check if fields are empty
         if albumName.text.isEmpty || albumFormat.text.isEmpty || albumYear.text.isEmpty {
@@ -41,12 +37,12 @@ class AddAlbumViewController: UIViewController {
         } else {
             
             // Set new values
-            album.setValue(albumName.text, forKey: "name")
-            album.setValue(albumFormat.text, forKey: "format")
-            album.setValue(albumYear.text, forKey: "year")
+            album.name = albumName.text
+            album.format = albumFormat.text
+            album.year = albumYear.text
             
             // Persisting and Error Handling
-            var error: NSError?
+            var error: NSError? = nil
             if !managedContext.save(&error) {
                 println("Could not save \(error), \(error?.userInfo)")
             }

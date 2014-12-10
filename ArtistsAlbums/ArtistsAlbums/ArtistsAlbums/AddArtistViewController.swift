@@ -25,11 +25,7 @@ class AddArtistViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext!
         
         // Get new Artist Object from CoreData
-        let entity =  NSEntityDescription.entityForName("Artist",
-            inManagedObjectContext:
-            managedContext)
-        let artist = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext:managedContext)
+        var artist = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: managedContext) as Artist
 
         // Check if fields are empty
         if artistName.text.isEmpty || artistLabel.text.isEmpty {
@@ -38,13 +34,12 @@ class AddArtistViewController: UIViewController {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         } else {
-
             // Set new values
-            artist.setValue(artistName.text, forKey: "name")
-            artist.setValue(artistLabel.text, forKey: "label")
+            artist.name = artistName.text
+            artist.label = artistLabel.text
 
             // Persisting and Error Handling
-            var error: NSError?
+            var error: NSError? = nil
             if !managedContext.save(&error) {
                 println("Could not save \(error), \(error?.userInfo)")
             }
