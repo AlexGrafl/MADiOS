@@ -1,18 +1,18 @@
 //
-//  Artist.swift
+//  ArtistsAlbums.swift
 //  ArtistsAlbums
 //
-//  Created by phips m on 10/12/14.
+//  Created by Alexander Grafl on 11/12/14.
 //  Copyright (c) 2014 Alexander Grafl. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class Artist: NSManagedObject {
+class ArtistsAlbums: NSManagedObject {
 
     @NSManaged var label: String
     @NSManaged var name: String
-    @NSManaged var relationship: NSSet
+    @NSManaged var albums: NSSet
 
 }
