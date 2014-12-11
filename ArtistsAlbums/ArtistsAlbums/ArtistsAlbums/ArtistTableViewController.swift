@@ -23,6 +23,8 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
     lazy var artistController:NSFetchedResultsController = {
         // Define what to be fetched
         let fetchRequest = NSFetchRequest(entityName: "Artist")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         // Set controller
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest
             , managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
@@ -66,12 +68,11 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showAlbum", sender: self)
         
     }
-    
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
