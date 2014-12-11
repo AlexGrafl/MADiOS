@@ -9,16 +9,32 @@
 import UIKit
 import CoreData
 
-class ArtistTableViewController: UITableViewController, UITableViewDataSource {
+class ArtistTableViewController: UITableViewController, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var artistTable: UITableView!
-    var artists = [Artist]()
-    var artistDetails:Artist? = nil
+    lazy var managedObjectContext: NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedObjectContext = appDelegate.managedObjectContext {
+            return managedObjectContext
+        } else {
+            return nil
+        }
+    }()
+    lazy var artistController:NSFetchedResultsController = {
+        // Define what to be fetched
+        let fetchRequest = NSFetchRequest(entityName: "Artist")
+        // Set controller
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest
+            , managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        
+        controller.performFetch(nil)
+        controller.delegate = self
+        
+        return controller
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        getAllArtists()
 
         self.artistTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ArtistCell")
     }
@@ -28,45 +44,21 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        getAllArtists()
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
         artistTable.reloadData()
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return self.artists.count
-    }
-
-    func getAllArtists() {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
-        // Define what to be fetched
-        let fetchRequest = NSFetchRequest(entityName:"Artist")
-        
-        // Fetch Data from CoreData
-        var error: NSError? = nil
-        
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest,
-            error: &error) as [Artist]?
-        
-        // Set result as artists array
-        if let results = fetchedResults  {
-            self.artists = results
-        } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
-        }
+        return artistController.sections![section].numberOfObjects
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.artistTable.dequeueReusableCellWithIdentifier("ArtistCell") as UITableViewCell
-        let artist = artists[indexPath.row]
+        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("ArtistCell", forIndexPath: indexPath) as UITableViewCell
+        let artist = artistController.objectAtIndexPath(indexPath) as Artist
             
-        cell.textLabel.text = artist.valueForKey("name") as? String
+        cell.textLabel!.text = artist.name
             
         return cell
     }
@@ -76,7 +68,6 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let artistDetails = artists[indexPath.row]
         self.performSegueWithIdentifier("showAlbum", sender: self)
         
     }
@@ -87,9 +78,10 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         let index = artistTable.indexPathForSelectedRow()
+        let artist = artistController.objectAtIndexPath(index!) as Artist
         if (segue.identifier == "showAlbum") {
             var albumController = segue.destinationViewController as AlbumTableViewController
-            albumController.artist = self.artists[index!.row]
+            albumController.artist = artist
         }
     }
 }
