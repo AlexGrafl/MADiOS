@@ -15,48 +15,59 @@ class AddArtistViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!	
     @IBOutlet weak var artistLabel: UITextField!
     @IBOutlet weak var artistName: UITextField!
-    
+    var artist: Artist? = nil
+
+    lazy var managedContext: NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedObjectContext = appDelegate.managedObjectContext {
+            return managedObjectContext
+        } else {
+            return nil
+        }
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set values in edit mode
+        if artist != nil {
+            artistLabel.text = artist?.label
+            artistName.text = artist?.name
+        }
+    }
+
+    func createArtist() {
+        let artist = NSEntityDescription.insertNewObjectForEntityForName("Album", inManagedObjectContext: self.managedContext!) as Artist
+        // Set new values
+        artist.name = artistName.text
+        artist.label = artistLabel.text
+        // Persisting
+        self.managedContext!.save(nil)
     }
     
-    @IBAction func addArtist(sender: AnyObject) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
-        // Get new Artist Object from CoreData
-        let artist = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: managedContext) as Artist
+    func editArtist() {
+        // Set new values
+        artist?.name = artistName.text
+        artist?.label = artistLabel.text
+        // Persisting
+        self.managedContext!.save(nil)
+    }
 
+    @IBAction func addArtist(sender: AnyObject) {
         // Check if fields are empty
-        if artistName.text.isEmpty || artistLabel.text.isEmpty {
+        if artistLabel.text.isEmpty || artistName.text.isEmpty {
             let alertController = UIAlertController(title: "Error", message: "Please fill out every field!", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-
+            
             self.presentViewController(alertController, animated: true, completion: nil)
-        } else {
-            // Set new values
-            artist.name = artistName.text
-            artist.label = artistLabel.text
-
-            // Persisting and Error Handling
-            var error: NSError? = nil
-            if !managedContext.save(&error) {
-                println("Could not save \(error), \(error?.userInfo)")
-                let alertController = UIAlertController(title: "Error", message: "Could not save Artist!", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-            
-                self.presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                /*
-                var artistName = artist.valueForKey("name") as String
-                let alertController = UIAlertController(title: "Success", message: "Artist \"\(artistName)\" saved successfully!", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            
-                self.presentViewController(alertController, animated: true, completion: nil)
-                */
-                navigationController?.popViewControllerAnimated(true)
-            }
         }
+        // Check if in edit mode
+        if artist != nil {
+            editArtist()
+        } else {
+            createArtist()
+        }
+        navigationController?.popViewControllerAnimated(true)
     }
 }
 
