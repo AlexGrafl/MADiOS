@@ -12,6 +12,8 @@ import CoreData
 class ArtistTableViewController: UITableViewController, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var artistTable: UITableView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    var isInEditMode: Bool = false
 
     lazy var managedContext: NSManagedObjectContext? = {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -41,6 +43,13 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
         super.viewDidLoad()
 
         self.artistTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ArtistCell")
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        editButton.title = "Edit"
+        isInEditMode = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,7 +83,11 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showAlbum", sender: self)
+        if isInEditMode {
+            self.performSegueWithIdentifier("editArtist", sender: self)
+        } else {
+            self.performSegueWithIdentifier("showAlbum", sender: self)
+        }
     }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -86,6 +99,22 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
             let artist:Artist = artistController.objectAtIndexPath(index!) as Artist
             var albumController = segue.destinationViewController as AlbumTableViewController
             albumController.artist = artist
+        }
+        if (segue.identifier == "editArtist") {
+            let index = artistTable.indexPathForSelectedRow()
+            let artist:Artist = artistController.objectAtIndexPath(index!) as Artist
+            var editArtistController = segue.destinationViewController as AddArtistViewController
+            editArtistController.artist = artist
+        }
+    }
+
+    func changeEditMode() {
+        if isInEditMode {
+            editButton.title = "Edit"
+            isInEditMode = false
+        } else {
+            editButton.title = "Done"
+            isInEditMode = true
         }
     }
 }
