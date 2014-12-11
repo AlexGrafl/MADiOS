@@ -108,7 +108,7 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
         }
     }
 
-    func changeEditMode() {
+    @IBAction func changeEditMode() {
         if isInEditMode {
             editButton.title = "Edit"
             isInEditMode = false

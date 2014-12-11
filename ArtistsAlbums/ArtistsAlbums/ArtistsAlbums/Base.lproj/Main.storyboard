@@ -82,7 +82,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Artists" id="KYT-zL-286">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="OHR-Jx-Vsh"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="OHR-Jx-Vsh">
+                            <connections>
+                                <action selector="changeEditMode" destination="Qpc-IG-hea" id="URE-2b-J8h"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="S38-h4-sPm">
                             <connections>
                                 <segue destination="bVE-oB-15e" kind="show" identifier="addArtist" id="UP4-Ma-per"/>
