@@ -41,8 +41,6 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.artistTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ArtistCell")
     }
 
     override func viewDidAppear(animated: Bool) {

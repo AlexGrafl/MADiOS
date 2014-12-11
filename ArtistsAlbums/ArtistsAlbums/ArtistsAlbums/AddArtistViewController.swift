@@ -37,7 +37,7 @@ class AddArtistViewController: UIViewController {
     }
 
     func createArtist() {
-        let artist = NSEntityDescription.insertNewObjectForEntityForName("Album", inManagedObjectContext: self.managedContext!) as Artist
+        let artist = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: self.managedContext!) as Artist
         // Set new values
         artist.name = artistName.text
         artist.label = artistLabel.text
