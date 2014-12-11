@@ -16,6 +16,7 @@ class AddAlbumViewController: UIViewController {
     @IBOutlet weak var albumName: UITextField!
     @IBOutlet weak var albumFormat: UITextField!
     @IBOutlet weak var addButton: UIButton!
+    var artist:NSManagedObject = NSManagedObject()
     
     override func viewDidLoad() {
         super.viewDidLoad()

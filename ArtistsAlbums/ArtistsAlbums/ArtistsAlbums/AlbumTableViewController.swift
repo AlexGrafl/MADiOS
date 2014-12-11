@@ -75,6 +75,10 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "addAlbum") {
+            var addAlbumController = segue.destinationViewController as AddAlbumViewController
+            addAlbumController.artist = self.artist
+        }
     }
     
 

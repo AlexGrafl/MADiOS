@@ -11,7 +11,7 @@
         <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Album" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Album" positionX="-54" positionY="9" width="128" height="90"/>
-        <element name="Artist" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Album" positionX="-54" positionY="9" width="128" height="88"/>
+        <element name="Artist" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>
