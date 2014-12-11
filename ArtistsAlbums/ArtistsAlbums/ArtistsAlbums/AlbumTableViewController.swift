@@ -27,6 +27,7 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
         // Define what to be fetched
         let fetchRequest = NSFetchRequest(entityName: "Album")
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let predicate = NSPredicate(format: "artist == %@", self.artist!)
         fetchRequest.sortDescriptors = [sortDescriptor]
         // Set controller
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest
@@ -70,6 +71,7 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let delAlbum: Album = albumController.objectAtIndexPath(indexPath) as Album
+        self.artist?.removeAlbum(delAlbum)
         self.managedContext!.deleteObject(delAlbum)
         self.managedContext!.save(nil)
     }
@@ -77,11 +79,12 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-        let index = albumTable.indexPathForSelectedRow()
-        let album = albumController.objectAtIndexPath(index!) as Album
+        // Pass the selected object to the new view controller
         if (segue.identifier == "editAlbum") {
+            let index = albumTable.indexPathForSelectedRow()
+            let album = albumController.objectAtIndexPath(index!) as Album
             var editAlbumController = segue.destinationViewController as AddAlbumViewController
+            editAlbumController.artist = self.artist!
             editAlbumController.album = album
         }
     }

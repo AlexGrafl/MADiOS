@@ -16,6 +16,7 @@ class AddAlbumViewController: UIViewController {
     @IBOutlet weak var albumName: UITextField!
     @IBOutlet weak var albumFormat: UITextField!
     @IBOutlet weak var addButton: UIButton!
+    var artist: Artist? = nil
     var album:Album? = nil
 
     lazy var managedContext: NSManagedObjectContext? = {
@@ -44,6 +45,8 @@ class AddAlbumViewController: UIViewController {
         album.name = albumName.text
         album.format = albumFormat.text
         album.year = albumYear.text
+
+        artist?.addAlbum(album)
         // Persisting
         self.managedContext!.save(nil)
     }

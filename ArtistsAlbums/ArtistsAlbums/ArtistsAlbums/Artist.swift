@@ -16,3 +16,15 @@ class Artist: NSManagedObject {
     @NSManaged var relationship: NSSet
 
 }
+
+extension Artist {
+    func addAlbum(album: Album) {
+        var albums = self.mutableArrayValueForKey("relationship")
+        albums.addObject(album)
+    }
+
+    func removeAlbum(album: Album) {
+        var albums = self.mutableArrayValueForKey("relationship")
+        albums.removeObject(album)
+    }
+}
