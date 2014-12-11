@@ -72,7 +72,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="bVE-oB-15e" kind="show" identifier="editArtist" id="VZt-uV-dsh"/>
+                                    <segue destination="0gP-dI-IsJ" kind="show" identifier="showAlbum" id="Civ-vQ-2rP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -96,6 +96,7 @@
                     <connections>
                         <outlet property="artistTable" destination="NCX-zd-MDr" id="HXJ-Zv-Eei"/>
                         <outlet property="editButton" destination="OHR-Jx-Vsh" id="UQC-8y-Ach"/>
+                        <segue destination="bVE-oB-15e" kind="show" identifier="editArtist" id="eLm-jF-1M9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lih-73-jVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -219,7 +220,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VZt-uV-dsh"/>
+        <segue reference="eLm-jF-1M9"/>
         <segue reference="f97-lR-dwS"/>
     </inferredMetricsTieBreakers>
 </document>
