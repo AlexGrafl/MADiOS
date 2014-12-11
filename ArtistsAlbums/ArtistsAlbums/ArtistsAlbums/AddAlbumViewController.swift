@@ -46,7 +46,7 @@ class AddAlbumViewController: UIViewController {
             var error: NSError? = nil
             if !managedContext.save(&error) {
                 println("Could not save \(error), \(error?.userInfo)")
-                let alertController = UIAlertController(title: "Error", message: "Couldn not save Album!", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Error", message: "Could not save Album!", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
                 
                 self.presentViewController(alertController, animated: true, completion: nil)

@@ -86,9 +86,10 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        let index = artistTable.indexPathForSelectedRow()
         if (segue.identifier == "showAlbum") {
             var albumController = segue.destinationViewController as AlbumTableViewController
-            albumController.artist = artistDetails!
+            albumController.artist = self.artists[index!.row]
         }
     }
 }
