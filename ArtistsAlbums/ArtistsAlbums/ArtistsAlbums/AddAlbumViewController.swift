@@ -45,8 +45,6 @@ class AddAlbumViewController: UIViewController {
         album.name = albumName.text
         album.format = albumFormat.text
         album.year = albumYear.text
-
-        artist?.addAlbum(album)
         // Persisting
         self.managedContext!.save(nil)
     }

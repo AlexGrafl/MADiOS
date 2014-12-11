@@ -4,14 +4,15 @@
         <attribute name="format" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="albums" inverseEntity="Artist" syncable="YES"/>
     </entity>
     <entity name="Artist" representedClassName="ArtistsAlbums.Artist" syncable="YES">
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Album" syncable="YES"/>
+        <relationship name="albums" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Album" inverseName="artist" inverseEntity="Album" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Album" positionX="-54" positionY="9" width="128" height="88"/>
+        <element name="Album" positionX="-54" positionY="9" width="128" height="103"/>
         <element name="Artist" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

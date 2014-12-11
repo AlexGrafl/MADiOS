@@ -71,7 +71,6 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let delAlbum: Album = albumController.objectAtIndexPath(indexPath) as Album
-        self.artist?.removeAlbum(delAlbum)
         self.managedContext!.deleteObject(delAlbum)
         self.managedContext!.save(nil)
     }
@@ -88,6 +87,4 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
             editAlbumController.album = album
         }
     }
-    
-
 }
