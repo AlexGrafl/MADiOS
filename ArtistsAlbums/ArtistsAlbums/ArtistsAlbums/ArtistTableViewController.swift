@@ -62,8 +62,8 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
         var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("ArtistCell", forIndexPath: indexPath) as UITableViewCell
         let artist = artistController.objectAtIndexPath(indexPath) as Artist
 
-        cell.textLabel!.text = artist.name
-            
+        cell.textLabel.text = artist.name
+        
         return cell
     }
 

@@ -9,11 +9,11 @@
 import Foundation
 import CoreData
 
-class ArtistsAlbums: NSManagedObject {
+class Album: NSManagedObject {
 
     @NSManaged var format: String
     @NSManaged var name: String
     @NSManaged var year: String
-    @NSManaged var artist: ArtistsAlbums.Artist
+    @NSManaged var artist: Artist
 
 }

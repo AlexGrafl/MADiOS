@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class ArtistsAlbums: NSManagedObject {
+class Artist: NSManagedObject {
 
     @NSManaged var label: String
     @NSManaged var name: String
