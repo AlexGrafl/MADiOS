@@ -25,8 +25,7 @@ class AddArtistViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext!
         
         // Get new Artist Object from CoreData
-        let entity = NSEntityDescription.entityForName("Artist", inManagedObjectContext: managedContext)
-        let artist = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let artist = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: managedContext) as Artist
         
         // Check if fields are empty
         if artistName.text.isEmpty || artistLabel.text.isEmpty {
@@ -36,8 +35,8 @@ class AddArtistViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
         } else {
             // Set new values
-            artist.setValue(artistName.text, forKey: "name")
-            artist.setValue(artistLabel.text, forKey: "label")
+            artist.name = artistName.text
+            artist.label = artistLabel.text
 
             // Persisting and Error Handling
             var error: NSError? = nil
@@ -48,11 +47,14 @@ class AddArtistViewController: UIViewController {
             
                 self.presentViewController(alertController, animated: true, completion: nil)
             } else {
+                /*
                 var artistName = artist.valueForKey("name") as String
                 let alertController = UIAlertController(title: "Success", message: "Artist \"\(artistName)\" saved successfully!", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             
                 self.presentViewController(alertController, animated: true, completion: nil)
+                */
+                navigationController?.popViewControllerAnimated(true)
             }
         }
     }

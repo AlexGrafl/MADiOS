@@ -12,8 +12,8 @@ import CoreData
 class ArtistTableViewController: UITableViewController, UITableViewDataSource {
 
     @IBOutlet var artistTable: UITableView!
-    var artists = [NSManagedObject]()
-    var artistDetails:NSManagedObject = NSManagedObject()
+    var artists = [Artist]()
+    var artistDetails:Artist? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
         var error: NSError? = nil
         
         let fetchedResults = managedContext.executeFetchRequest(fetchRequest,
-            error: &error) as [NSManagedObject]?
+            error: &error) as [Artist]?
         
         // Set result as artists array
         if let results = fetchedResults  {
@@ -86,9 +86,9 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        if (segue.identifier == "showAlbums") {
+        if (segue.identifier == "showAlbum") {
             var albumController = segue.destinationViewController as AlbumTableViewController
-            albumController.artist = artistDetails
+            albumController.artist = artistDetails!
         }
     }
 }

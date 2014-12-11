@@ -16,7 +16,7 @@ class AddAlbumViewController: UIViewController {
     @IBOutlet weak var albumName: UITextField!
     @IBOutlet weak var albumFormat: UITextField!
     @IBOutlet weak var addButton: UIButton!
-    var artist:NSManagedObject = NSManagedObject()
+    var artist:Artist? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,7 @@ class AddAlbumViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext!
         
         // Get new Artist Object from CoreData
-        let entity = NSEntityDescription.entityForName("Album", inManagedObjectContext: managedContext)
-        let album = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let album = NSEntityDescription.insertNewObjectForEntityForName("Album", inManagedObjectContext: managedContext) as Album
         
         // Check if fields are empty
         if albumName.text.isEmpty || albumFormat.text.isEmpty || albumYear.text.isEmpty {
@@ -39,10 +38,10 @@ class AddAlbumViewController: UIViewController {
         } else {
             
             // Set new values
-            album.setValue(albumFormat.text, forKey: "name")
-            album.setValue(albumFormat.text, forKey: "format")
-            album.setValue(albumYear.text, forKey: "year")
-            
+            album.name = albumName.text
+            album.format = albumFormat.text
+            album.year = albumYear.text
+
             // Persisting and Error Handling
             var error: NSError? = nil
             if !managedContext.save(&error) {
@@ -52,10 +51,13 @@ class AddAlbumViewController: UIViewController {
                 
                 self.presentViewController(alertController, animated: true, completion: nil)
             } else {
+                /*
                 let alertController = UIAlertController(title: "Success", message: "Album saved successfully!", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 
                 self.presentViewController(alertController, animated: true, completion: nil)
+                */
+                navigationController?.popViewControllerAnimated(true)
             }
         }
     }
