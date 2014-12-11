@@ -9,16 +9,37 @@
 import UIKit
 import CoreData
 
-class AlbumTableViewController: UITableViewController, UITableViewDataSource {
+class AlbumTableViewController: UITableViewController, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var albumTable: UITableView!
-    var albums = [Album]()
-    var artist:Artist? = nil
+    var artist: Artist? = nil
+    
+    lazy var managedContext: NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedObjectContext = appDelegate.managedObjectContext {
+            return managedObjectContext
+        } else {
+            return nil
+        }
+    }()
+    
+    lazy var albumController: NSFetchedResultsController = {
+        // Define what to be fetched
+        let fetchRequest = NSFetchRequest(entityName: "Album")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        // Set controller
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest
+            , managedObjectContext: self.managedContext!, sectionNameKeyPath: nil, cacheName: nil)
+        
+        controller.performFetch(nil)
+        controller.delegate = self
+        
+        return controller
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        getAllAlbums()
 
         self.albumTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AlbmuCell")
     }
@@ -28,56 +49,40 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        getAllAlbums()
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
         albumTable.reloadData()
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return self.albums.count
+        return albumController.sections![section].numberOfObjects
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.albumTable.dequeueReusableCellWithIdentifier("AlbumCell") as UITableViewCell
-        let album = albums[indexPath.row]
+        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("AlbumCell", forIndexPath: indexPath) as UITableViewCell
+        let album = albumController.objectAtIndexPath(indexPath) as Album
         
-        cell.textLabel.text = album.valueForKey("name") as? String
+        cell.textLabel!.text = album.name
         
         return cell
     }
 
-    func getAllAlbums() {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
-        // Define what to be fetched
-        let fetchRequest = NSFetchRequest(entityName:"Album")
-        
-        // Fetch Data from CoreData
-        var error: NSError? = nil
-        
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest,
-            error: &error) as [Album]?
-        
-        // Set result as artists array
-        if let results = fetchedResults {
-            self.albums = results
-        } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
-        }
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let delAlbum: Album = albumController.objectAtIndexPath(indexPath) as Album
+        self.managedContext!.deleteObject(delAlbum)
+        self.managedContext!.save(nil)
     }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        if (segue.identifier == "addAlbum") {
-            var addAlbumController = segue.destinationViewController as AddAlbumViewController
-            addAlbumController.artist = self.artist!
+        let index = albumTable.indexPathForSelectedRow()
+        let album = albumController.objectAtIndexPath(index!) as Album
+        if (segue.identifier == "editAlbum") {
+            var editAlbumController = segue.destinationViewController as AddAlbumViewController
+            editAlbumController.album = album
         }
     }
     

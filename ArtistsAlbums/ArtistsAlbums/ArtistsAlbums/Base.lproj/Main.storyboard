@@ -118,6 +118,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="apb-jn-3UH" kind="show" identifier="editAlbum" id="f97-lR-dwS"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -209,4 +212,7 @@
             <point key="canvasLocation" x="78" y="75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="f97-lR-dwS"/>
+    </inferredMetricsTieBreakers>
 </document>

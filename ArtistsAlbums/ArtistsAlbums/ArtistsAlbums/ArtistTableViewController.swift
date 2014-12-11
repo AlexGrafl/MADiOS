@@ -13,7 +13,7 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
 
     @IBOutlet var artistTable: UITableView!
 
-    lazy var managedObjectContext: NSManagedObjectContext? = {
+    lazy var managedContext: NSManagedObjectContext? = {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         if let managedObjectContext = appDelegate.managedObjectContext {
             return managedObjectContext
@@ -29,7 +29,7 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
         fetchRequest.sortDescriptors = [sortDescriptor]
         // Set controller
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest
-            , managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+            , managedObjectContext: self.managedContext!, sectionNameKeyPath: nil, cacheName: nil)
         
         controller.performFetch(nil)
         controller.delegate = self
@@ -39,13 +39,6 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let entityDescription = NSEntityDescription.entityForName("Artist", inManagedObjectContext: self.managedObjectContext!)
-        let artist = Artist()
-        artist.name = "Georg"
-        artist.label = "Label"
-
-        self.managedObjectContext!.save(nil)
 
         self.artistTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ArtistCell")
     }
@@ -74,9 +67,14 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
         return cell
     }
 
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let delArtist: Artist = artistController.objectAtIndexPath(indexPath) as Artist
+        self.managedContext!.deleteObject(delArtist)
+        self.managedContext!.save(nil)
+    }
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showAlbum", sender: self)
-        
     }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
