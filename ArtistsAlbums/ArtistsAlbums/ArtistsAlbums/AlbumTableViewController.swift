@@ -29,6 +29,7 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         let predicate = NSPredicate(format: "artist == %@", self.artist!)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = predicate
         // Set controller
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest
             , managedObjectContext: self.managedContext!, sectionNameKeyPath: nil, cacheName: nil)
@@ -85,6 +86,10 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
             var editAlbumController = segue.destinationViewController as AddAlbumViewController
             editAlbumController.artist = self.artist!
             editAlbumController.album = album
+        }
+        if(segue.identifier == "addAlbum"){
+            var editAlbumController = segue.destinationViewController as AddAlbumViewController
+            editAlbumController.artist = self.artist!
         }
     }
 }

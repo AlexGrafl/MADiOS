@@ -82,8 +82,8 @@ class ArtistTableViewController: UITableViewController, UITableViewDataSource, N
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         if (segue.identifier == "showAlbum") {
-            let index = artistTable.indexPathForSelectedRow()
-            let artist = artistController.objectAtIndexPath(index!) as Artist
+            let index = artistTable.indexPathForSelectedRow()         
+            let artist:Artist = artistController.objectAtIndexPath(index!) as Artist
             var albumController = segue.destinationViewController as AlbumTableViewController
             albumController.artist = artist
         }
