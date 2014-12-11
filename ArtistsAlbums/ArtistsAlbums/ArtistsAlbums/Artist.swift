@@ -13,6 +13,6 @@ class Artist: NSManagedObject {
 
     @NSManaged var label: String
     @NSManaged var name: String
-    @NSManaged var relationship: NSSet
+    @NSManaged var albums: NSSet
 
 }
