@@ -43,7 +43,7 @@ class AlbumTableViewController: UITableViewController, UITableViewDataSource, NS
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.albumTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AlbmuCell")
+        self.albumTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AlbumCell")
     }
 
     override func didReceiveMemoryWarning() {
